@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://refugee-rise.vercel.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://refugee-rise.vercel.app/our-model/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://refugee-rise.vercel.app/impact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://refugee-rise.vercel.app/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://refugee-rise.vercel.app/get-involved/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://refugee-rise.vercel.app/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>

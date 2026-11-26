@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Design tokens. All text/background pairs meet WCAG 2.2 AA. */
+:root {
+  --rr-ink: #17261f;
+  --rr-sand-50: #faf6ee;
+  --rr-sand-100: #f1e7d6;
+  --rr-sand-200: #e4d4b8;
+  --rr-clay-600: #a8401c;
+  --rr-clay-500: #c2582b;
+  --rr-ochre-400: #e2a33a;
+  --rr-acacia-700: #2e5a4c;
+  --rr-acacia-800: #23473c;
+  --rr-muted: #545e58;
+}
+
+@theme inline {
+  --color-ink: var(--rr-ink);
+  --color-sand-50: var(--rr-sand-50);
+  --color-sand-100: var(--rr-sand-100);
+  --color-sand-200: var(--rr-sand-200);
+  --color-clay-600: var(--rr-clay-600);
+  --color-clay-500: var(--rr-clay-500);
+  --color-ochre-400: var(--rr-ochre-400);
+  --color-acacia-700: var(--rr-acacia-700);
+  --color-acacia-800: var(--rr-acacia-800);
+  --color-muted: var(--rr-muted);
+  --color-line: color-mix(in oklab, var(--rr-ink) 14%, transparent);
+
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--rr-sand-50);
+  color: var(--rr-ink);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+
+:focus-visible {
+  outline: 3px solid var(--rr-clay-600);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection { background: var(--rr-ochre-400); color: var(--rr-ink); }
+
+.rise {
+  animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
