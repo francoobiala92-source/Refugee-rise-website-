@@ -28,10 +28,44 @@ export const nav = [
   { href: "/get-involved/", label: "Get involved" },
 ] as const;
 
+/**
+ * Donation details shown on /donate/.
+ * Fill in your own bank and M-Pesa details below. Any field left as an
+ * empty string ("") is hidden on the site automatically.
+ * Only ever publish details people need to SEND money (account number,
+ * account name, bank, branch). Never publish PINs, passwords, card
+ * numbers, CVV codes or online-banking logins.
+ */
+export const donate = {
+  bank: {
+    bankName: "Equity Bank Kenya",
+    accountName: "Ohisa Franco Obiala", // founder's account, used for the organisation's donations
+    accountNumber: "1650162850298",
+    branch: "", // e.g. "Kakuma Branch"
+    swift: "", // optional, for international transfers
+    note: "This account is held by our founder, Ohisa Franco, and receives donations for Refugee Rise Initiative.",
+  },
+  mpesa: {
+    // Use a Paybill or Till number if you have one; otherwise a phone number.
+    paybill: "",
+    accountRef: "", // e.g. "DONATION"
+    till: "",
+    phone: "", // e.g. "0798 957 667"
+  },
+  /** Current fundraising goal. Update `raised` as gifts arrive. */
+  goal: { label: "Fund our next projects", target: 1500000, raised: 0 },
+  amounts: [
+    { value: 1000, impact: "buys a crate of starter stock for a new shop" },
+    { value: 5000, impact: "pays for shelving or a counter" },
+    { value: 20000, impact: "stocks a shop's staple foods for a month" },
+    { value: 80000, impact: "buys a motorbike for a boda boda business" },
+  ],
+};
+
 /** Headline figures, used everywhere a number appears so they never disagree. */
 export const figures = {
-  businesses: 2,
-  invested: "Ksh 400,000",
+  businesses: 3,
+  invested: "Ksh 480,000",
   grant: "US$4,000",
   shopsPlanned: "10–15",
   shopCost: "Ksh 300,000",
@@ -99,7 +133,33 @@ export const stories = [
       ["Status", "Trading and repaying"],
     ],
   },
+  {
+    id: "emmanuel",
+    name: "Emmanuel Lolito",
+    place: "Kakuma",
+    kind: "New motorbike, a transport business",
+    photo: "/images/emmanuel-moto.jpg",
+    photoAlt: "Emmanuel Lolito giving a thumbs-up beside his new TVS Star HLX 125 motorbike, still in its factory seat cover.",
+    summary:
+      "Emmanuel needed a way to earn and support his family. We bought him a brand-new motorbike so he can run a boda boda (motorbike taxi) business. Since August 2026 he has repaid Ksh 15,000 every month from his fares.",
+    facts: [
+      ["Invested", "Ksh 80,000 (new motorbike)"],
+      ["Repayment", "Ksh 120,000 at Ksh 15,000/month"],
+      ["Status", "Repaying on time since August 2026"],
+    ],
+  },
 ];
+
+/**
+ * Emmanuel's repayment tracker. Update `repaid` each month when his
+ * Ksh 15,000 payment arrives (4 payments, Aug–Nov 2026 = 60,000).
+ */
+export const emmanuelRepayment = {
+  total: 120000,
+  repaid: 60000,
+  monthly: 15000,
+  since: "August 2026",
+};
 
 export const grant = {
   title: "Inkomoko FAST grant",

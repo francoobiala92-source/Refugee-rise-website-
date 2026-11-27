@@ -2,8 +2,13 @@
   "name": "refugee-rise",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.14.0",
     "@fontsource-variable/fraunces": "^5.2.5",
     "@fontsource-variable/instrument-sans": "^5.2.5",
     "lucide-react": "^0.468.0",

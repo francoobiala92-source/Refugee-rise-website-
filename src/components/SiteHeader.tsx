@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Heart, Menu, X } from "lucide-react";
 import { nav, site } from "@/content/site";
 import { Container, LogoMark } from "./ui";
 
@@ -38,22 +38,39 @@ export function SiteHeader() {
           ))}
           <Link
             href="/contact/"
-            className="ml-3 inline-flex min-h-11 items-center rounded-full bg-ink px-5 text-[0.9375rem] font-semibold text-sand-50 hover:bg-acacia-700"
+            className="ml-2 inline-flex min-h-11 items-center rounded-full border border-ink/25 px-5 text-[0.9375rem] font-semibold hover:border-ink hover:bg-ink/5"
           >
             Contact
           </Link>
+          <Link
+            href="/donate/"
+            aria-current={isActive("/donate/") ? "page" : undefined}
+            className="group ml-2 inline-flex min-h-11 items-center gap-2 rounded-full bg-clay-600 px-5 text-[0.9375rem] font-semibold text-white hover:bg-[#8f3616]"
+          >
+            <Heart aria-hidden className="size-4 fill-white transition-transform duration-300 group-hover:scale-125" />
+            Donate
+          </Link>
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex size-11 items-center justify-center rounded-full border border-line md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
-          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <Link
+            href="/donate/"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-clay-600 px-4 text-[0.9375rem] font-semibold text-white"
+          >
+            <Heart aria-hidden className="size-4 fill-white" />
+            Donate
+          </Link>
+          <button
+            type="button"
+            className="inline-flex size-11 items-center justify-center rounded-full border border-line"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
+            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+          </button>
+        </div>
       </Container>
 
       {open && (

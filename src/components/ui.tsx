@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import type { ReactNode } from "react";
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -21,7 +21,7 @@ export function Eyebrow({ children, light = false }: { children: ReactNode; ligh
 type BtnProps = {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "light";
+  variant?: "primary" | "secondary" | "light" | "donate";
   external?: boolean;
   arrow?: boolean;
 };
@@ -31,10 +31,12 @@ export function Button({ href, children, variant = "primary", external, arrow = 
     primary: "bg-clay-600 text-white hover:bg-[#8f3616]",
     secondary: "border border-ink/25 text-ink hover:border-ink hover:bg-ink/5",
     light: "bg-sand-50 text-ink hover:bg-white",
+    donate: "bg-clay-600 text-white hover:bg-[#8f3616] shadow-[0_14px_30px_-12px_rgba(168,64,28,0.65)]",
   }[variant];
-  const cls = `group inline-flex min-h-12 items-center gap-2 rounded-full px-6 py-3 text-[0.9375rem] font-semibold transition-colors ${styles}`;
+  const cls = `group inline-flex min-h-12 items-center gap-2 rounded-full px-6 py-3 text-[0.9375rem] font-semibold transition-[background-color,transform] hover:-translate-y-0.5 ${styles}`;
   const inner = (
     <>
+      {variant === "donate" && <Heart aria-hidden className="size-4 fill-white transition-transform duration-300 group-hover:scale-125" />}
       {children}
       {arrow && <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />}
     </>
@@ -115,14 +117,16 @@ export function CtaBand() {
   return (
     <section className="bg-acacia-700 text-sand-50">
       <Container className="flex flex-col items-start gap-8 py-16 sm:py-20 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl" data-reveal="left">
           <Eyebrow light>Join the loop</Eyebrow>
           <h2 className="text-[clamp(1.9rem,1.4rem+2vw,3rem)] font-medium">Help us build the next 10–15 shops.</h2>
           <p className="mt-4 text-lg text-sand-100/85">
-            Partners, funders and mentors all have a part. Every shilling repaid is reinvested in the next business.
+            We are raising Ksh 1.5 million for our next projects. A gift of any size goes into the loop: every
+            shilling repaid is reinvested in the next business, so your donation keeps working long after you give it.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3" data-reveal="right">
+          <Button href="/donate/" variant="donate" arrow={false}>Donate now</Button>
           <Button href="/get-involved/" variant="light">Ways to get involved</Button>
           <Link
             href="/contact/"

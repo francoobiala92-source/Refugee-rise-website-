@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Award } from "lucide-react";
 import { grant, site } from "@/content/site";
 import { Container, CtaBand, Eyebrow, PageHero, SectionHead } from "@/components/ui";
@@ -24,13 +25,22 @@ export default function About() {
             <h2 className="text-[clamp(1.9rem,1.4rem+2vw,3rem)] font-medium">
               It started with one question: what if support didn’t run out?
             </h2>
-            <div className="mt-8 flex items-center gap-4 rounded-[1.25rem] bg-sand-100 p-5">
-              <span aria-hidden className="display flex size-14 shrink-0 items-center justify-center rounded-full bg-acacia-700 text-xl font-medium text-sand-50">OF</span>
-              <div>
-                <p className="font-semibold">{site.founder}</p>
-                <p className="text-sm text-muted">Founder · Inkomoko Business Accelerator alumnus, 2025</p>
+            <figure data-reveal="left" className="zoom-media relative mt-10 max-w-sm">
+              <div aria-hidden className="absolute -bottom-4 -right-4 h-full w-full rounded-[1.5rem] border-2 border-ochre-400" />
+              <div className="relative overflow-hidden rounded-[1.5rem] bg-sand-100">
+                <Image
+                  src="/images/ohisa-franco.jpg"
+                  alt={`${site.founder}, founder of ${site.name}`}
+                  width={1205}
+                  height={1205}
+                  className="aspect-[4/5] w-full object-cover object-top"
+                />
               </div>
-            </div>
+              <figcaption className="relative -mt-8 ml-5 mr-10 rounded-xl bg-ink px-5 py-4 text-sand-50 shadow-lg">
+                <p className="display text-xl font-medium">{site.founder}</p>
+                <p className="mt-0.5 text-sm text-sand-100/75">Founder · Inkomoko Business Accelerator alumnus, 2025</p>
+              </figcaption>
+            </figure>
           </div>
           <div className="space-y-5 text-lg text-muted">
             <p>
@@ -45,7 +55,7 @@ export default function About() {
             </p>
             <p>
               In 2025 the initiative was selected for Inkomoko’s Fund for Alumni Start-ups in Transition, supported by the
-              Mastercard Foundation. That grant helped fund our first shop. Today two businesses are trading, and the next ones
+              Mastercard Foundation. That grant helped fund our first shop. Today three businesses are running, and the next ones
               are planned.
             </p>
           </div>

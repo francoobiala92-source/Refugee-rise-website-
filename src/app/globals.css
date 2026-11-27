@@ -49,14 +49,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .display {
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.015em;
-  line-height: 1.08;
-  text-wrap: balance;
+/* In the base layer so utilities such as whitespace-nowrap can override them. */
+@layer base {
+  h1, h2, h3, .display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
 }
-p { text-wrap: pretty; }
 
 :focus-visible {
   outline: 3px solid var(--rr-clay-600);
@@ -73,3 +76,80 @@ p { text-wrap: pretty; }
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Scroll reveal: hidden only when JS is running, so content never disappears without it.
+   Stagger siblings with style={{ "--d": "120ms" }}. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+html.js [data-reveal="left"] { transform: translateX(-36px); }
+html.js [data-reveal="right"] { transform: translateX(36px); }
+html.js [data-reveal="zoom"] { transform: scale(0.94); }
+html.js [data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* Progress bars fill smoothly, with a light sheen passing over them. */
+.progress-fill {
+  position: relative;
+  transition: width 1600ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgb(255 255 255 / 0.45) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: sheen 2.6s ease-in-out 1.8s infinite;
+}
+@keyframes sheen { to { transform: translateX(100%); } }
+
+/* Soft pulsing ring around primary donate buttons. */
+.donate-pulse { position: relative; isolation: isolate; }
+.donate-pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--rr-clay-500);
+  animation: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.55; }
+  80%, 100% { transform: scale(1.35, 1.6); opacity: 0; }
+}
+
+.heart-beat { animation: heart-beat 1.6s ease-in-out infinite; transform-origin: center; }
+@keyframes heart-beat {
+  0%, 60%, 100% { transform: scale(1); }
+  15% { transform: scale(1.22); }
+  30% { transform: scale(0.95); }
+  45% { transform: scale(1.12); }
+}
+
+/* Gentle float for decorative badges. */
+.float-slow { animation: float-slow 5s ease-in-out infinite; }
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Projects slider: slide width + gap drive the glide distance (gap matches gap-5 / sm:gap-6). */
+.slider-vars { --slide: 88%; --gap: 1.25rem; }
+@media (min-width: 640px) { .slider-vars { --gap: 1.5rem; } }
+@media (min-width: 768px) { .slider-vars { --slide: 82%; } }
+
+/* Slow drift on the active slide's photo. */
+.ken-burns { animation: ken-burns 9s ease-out both; }
+@keyframes ken-burns {
+  from { transform: scale(1.08) translate(1%, 1%); }
+  to { transform: scale(1) translate(0, 0); }
+}
+
+@keyframes slide-timer { from { width: 0; } to { width: 100%; } }
+
+/* Image hover zoom inside a clipped card. */
+.zoom-media img { transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1); }
+.zoom-media:hover img { transform: scale(1.05); }

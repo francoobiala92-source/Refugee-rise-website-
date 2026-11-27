@@ -83,8 +83,9 @@ export default function GetInvolved() {
                     <li key={l} className="rounded-full bg-acacia-700/10 px-4 py-2 text-sm font-medium text-acacia-800">{l}</li>
                   ))}
                 </ul>
-                <div className="mt-8">
-                  <Button href={`/contact/?topic=${s.cta.topic}`}>{s.cta.label}</Button>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {s.id === "partners" && <Button href="/donate/" variant="donate" arrow={false}>Donate now</Button>}
+                  <Button href={`/contact/?topic=${s.cta.topic}`} variant={s.id === "partners" ? "secondary" : "primary"}>{s.cta.label}</Button>
                 </div>
               </div>
             </Container>

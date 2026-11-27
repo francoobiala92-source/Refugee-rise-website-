@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Heart, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { nav, site, sdgs } from "@/content/site";
 import { Container, LogoMark } from "./ui";
 
@@ -16,6 +16,13 @@ export function SiteFooter() {
           <p className="mt-5 max-w-sm text-sand-100/80">
             A refugee-led, community-based organisation helping refugees in Kakuma build businesses of their own.
           </p>
+          <Link
+            href="/donate/"
+            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-clay-600 px-5 font-semibold text-white transition-transform hover:-translate-y-0.5 hover:bg-[#8f3616]"
+          >
+            <Heart aria-hidden className="size-4 fill-white" />
+            Donate
+          </Link>
         </div>
 
         <div>

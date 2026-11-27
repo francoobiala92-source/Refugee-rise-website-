@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Award, CheckCircle2 } from "lucide-react";
-import { figures, grant, sdgs, stories } from "@/content/site";
-import { Container, CtaBand, PageHero, SectionHead } from "@/components/ui";
+import { figures, grant, sdgs } from "@/content/site";
+import { Button, Container, CtaBand, PageHero, SectionHead } from "@/components/ui";
+import { CountUp } from "@/components/motion";
+import { ProjectsSlider } from "@/components/ProjectsSlider";
 
 export const metadata: Metadata = {
   title: "Impact",
-  description: "Two refugee-owned businesses trading in Kakuma, Ksh 400,000 invested, an Inkomoko FAST grant, and 10–15 more shops planned.",
+  description: "Three refugee-owned businesses running in Kakuma, Ksh 480,000 invested, an Inkomoko FAST grant, and 10–15 more shops planned.",
 };
 
 export default function Impact() {
@@ -15,22 +17,26 @@ export default function Impact() {
       <PageHero
         eyebrow="Impact & achievements"
         title="Early results, measured honestly."
-        intro={`We are early: two businesses open and trading, and ${figures.shopsPlanned} more shops planned. Here is exactly what has been invested, by whom, and on what terms.`}
-      />
+        intro={`We are early: three businesses open and running, and ${figures.shopsPlanned} more shops planned. Here is exactly what has been invested, by whom, and on what terms.`}
+      >
+        <div className="mt-8">
+          <Button href="/donate/" variant="donate" arrow={false}>Fund the next business</Button>
+        </div>
+      </PageHero>
 
       <section>
         <Container className="py-20 sm:py-24">
           <dl className="grid gap-px overflow-hidden rounded-[1.25rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {[
               [String(figures.businesses), "refugee-owned businesses launched"],
-              [figures.invested, "invested across both businesses"],
+              [figures.invested, "invested across all three businesses"],
               [figures.grant, "grant from Inkomoko FAST"],
               [figures.shopsPlanned, "more shops planned"],
-            ].map(([v, l]) => (
-              <div key={l} className="bg-sand-50 p-7">
+            ].map(([v, l], i) => (
+              <div key={l} data-reveal="zoom" style={{ "--d": `${i * 100}ms` } as React.CSSProperties} className="bg-sand-50 p-7">
                 <dt className="sr-only">{l}</dt>
                 <dd>
-                  <span className="display block text-[clamp(2rem,1.5rem+1.6vw,2.75rem)] font-medium whitespace-nowrap text-clay-600">{v}</span>
+                  <span className="display block text-[clamp(1.9rem,1.25rem+1.2vw,2.25rem)] font-medium whitespace-nowrap text-clay-600"><CountUp value={v} /></span>
                   <span className="mt-1 block text-muted">{l}</span>
                 </dd>
               </div>
@@ -41,8 +47,8 @@ export default function Impact() {
             <SectionHead eyebrow="Results so far" title="What has changed." />
             <ul className="space-y-4">
               {[
-                "Two refugee entrepreneurs now run businesses that support their families.",
-                "A shop-building model that works, from construction to stocking to repayment.",
+                "Three refugee entrepreneurs now run businesses that support their families.",
+                "A model that works for shops and for transport, from setup to repayment.",
                 "Local jobs for builders, shop attendants and suppliers.",
                 "Written agreements that give entrepreneurs clear, fair terms from day one.",
                 "Young people in the camp seeing that starting a business is possible.",
@@ -59,41 +65,44 @@ export default function Impact() {
 
       <section className="bg-sand-100" id="stories">
         <Container className="py-20 sm:py-24">
-          <SectionHead eyebrow="Entrepreneur stories" title="Two businesses, two different starting points." />
-          <div className="grid gap-8 lg:grid-cols-2">
-            {stories.map((s) => (
-              <article key={s.id} className="overflow-hidden rounded-[1.25rem] bg-sand-50">
-                <Image src={s.photo} alt={s.photoAlt} width={1200} height={800} className="aspect-[3/2] w-full object-cover" />
-                <div className="p-7 sm:p-8">
-                  <p className="text-sm font-semibold uppercase tracking-[0.12em] text-clay-600">{s.kind}</p>
-                  <h3 className="mt-2 text-3xl font-medium">{s.name}</h3>
-                  <p className="text-muted">{s.place}</p>
-                  <p className="mt-4 text-lg">{s.summary}</p>
-                  <dl className="mt-6 divide-y divide-line border-y border-line">
-                    {s.facts.map(([k, v]) => (
-                      <div key={k} className="flex justify-between gap-4 py-3">
-                        <dt className="text-muted">{k}</dt>
-                        <dd className="text-right font-semibold">{v}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              </article>
-            ))}
+          <div data-reveal>
+            <SectionHead eyebrow="Entrepreneur stories" title="Three businesses, three different starting points." />
+          </div>
+          <div data-reveal>
+            <ProjectsSlider onSand />
           </div>
         </Container>
       </section>
 
       <section>
         <Container className="py-20 sm:py-24">
-          <div className="grid items-center gap-8 rounded-[1.25rem] border border-line p-7 sm:p-10 lg:grid-cols-[auto_1fr_auto]">
-            <Award aria-hidden className="size-14 text-ochre-400" />
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-clay-600">Recognition · {grant.date}</p>
+          <div className="grid items-center gap-10 rounded-[1.5rem] border border-line p-7 sm:p-10 lg:grid-cols-[1fr_1.1fr]">
+            <div data-reveal="left">
+              <Award aria-hidden className="size-12 text-ochre-400" />
+              <p className="mt-5 text-sm font-semibold uppercase tracking-[0.12em] text-clay-600">Recognition · {grant.date}</p>
               <h2 className="mt-2 text-3xl font-medium">{grant.title}</h2>
-              <p className="mt-3 max-w-2xl text-muted">{grant.body}</p>
+              <p className="display mt-3 text-4xl font-medium text-acacia-700"><CountUp value={grant.amount} /></p>
+              <p className="mt-4 text-muted">{grant.body}</p>
             </div>
-            <p className="display text-4xl font-medium text-acacia-700">{grant.amount}</p>
+            <figure data-reveal="right" className="group">
+              <a
+                href="/images/inkomoko-certificate.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block overflow-hidden rounded-xl shadow-[0_30px_60px_-30px_rgba(23,38,31,0.5)] ring-1 ring-line transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-0.5deg]"
+              >
+                <Image
+                  src="/images/inkomoko-certificate.jpg"
+                  alt="Inkomoko certificate of completion awarded to Ohisa Franco for the Business Accelerator Program (Idea stage track), Fund for Alumni Start-ups in Transition, in partnership with the Mastercard Foundation, May 2025."
+                  width={1407}
+                  height={717}
+                  className="w-full"
+                />
+              </a>
+              <figcaption className="mt-3 text-sm text-muted">
+                Certificate of completion, Inkomoko Business Accelerator Program, May 2025. Tap to view full size.
+              </figcaption>
+            </figure>
           </div>
         </Container>
       </section>
